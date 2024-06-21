@@ -1,10 +1,5 @@
 // driver.ts
-import {
-  createClient,
-  Client,
-  InStatement,
-  ResultSet,
-} from "@libsql/client/web";
+import type { InStatement, ResultSet } from "@libsql/client/web";
 import {
   SqliteLikeBaseDriver,
   DatabaseHeader,
@@ -14,32 +9,37 @@ import {
 } from "@libsqlstudio/gui/driver";
 
 export default class TursoDriver extends SqliteLikeBaseDriver {
-  protected client: Client;
-  protected endpoint: string = "";
   protected authToken = "";
-
-  constructor(url: string, authToken: string) {
-    super();
-    this.endpoint = url;
-    this.authToken = authToken;
-
-    this.client = createClient({
-      url: this.endpoint,
-      authToken: this.authToken,
-    });
-  }
 
   supportBigInt(): boolean {
     return false;
   }
 
   async query(stmt: InStatement) {
-    const r = await this.client.execute(stmt);
-    return transformRawResult(r);
+    const resp = await fetch("/api/execute", {
+      method: "POST",
+      body: JSON.stringify({ statement: stmt }),
+    });
+
+    if (!resp.ok) {
+      throw new Error(await resp.text());
+    }
+
+    const res = await resp.json();
+    return transformRawResult(res);
   }
 
   async transaction(stmt: InStatement[]) {
-    return (await this.client.batch(stmt, "write")).map(transformRawResult);
+    const resp = await fetch("/api/transaction", {
+      method: "POST",
+      body: JSON.stringify({ statements: stmt }),
+    });
+    if (!resp.ok) {
+      throw new Error(await resp.text());
+    }
+
+    const res = await resp.json();
+    return res.map(transformRawResult);
   }
 }
 

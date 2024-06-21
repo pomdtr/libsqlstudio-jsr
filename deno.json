@@ -4,6 +4,10 @@
     "exports": {
         ".": "./mod.ts"
     },
+    "tasks": {
+        "build:frontend": "cd frontend && npm run build",
+        "build": "deno task build:frontend && deno run -A embed.ts build"
+    },
     "publish": {
         "include": [
             "embed/**/*",

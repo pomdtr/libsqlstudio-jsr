@@ -6,6 +6,7 @@
       "jsr:@cliffy/flags@1.0.0-rc.4": "jsr:@cliffy/flags@1.0.0-rc.4",
       "jsr:@cliffy/table@1.0.0-rc.4": "jsr:@cliffy/table@1.0.0-rc.4",
       "jsr:@hono/hono": "jsr:@hono/hono@4.4.7",
+      "jsr:@hono/hono@4.4.7": "jsr:@hono/hono@4.4.7",
       "jsr:@hono/hono@^4.0.0": "jsr:@hono/hono@4.4.7",
       "jsr:@nfnitloop/deno-embedder": "jsr:@nfnitloop/deno-embedder@1.3.1",
       "jsr:@nfnitloop/deno-embedder@1.3.1": "jsr:@nfnitloop/deno-embedder@1.3.1",
@@ -146,7 +147,11 @@
       }
     }
   },
+  "redirects": {
+    "https://esm.town/v/pomdtr/basicAuth": "https://esm.town/v/pomdtr/basicAuth?v=65"
+  },
   "remote": {
+    "https://esm.town/v/pomdtr/basicAuth?v=65": "d42002f6cad9bf244b33718d388c8c1ed50d4ca923a41a4b7a2e22594de5f202",
     "https://raw.githubusercontent.com/pomdtr/deno-embedder/hono/middleware/_src/jsr_fix.ts": "446a20e27ae7cf5f9ecf738995004a04601121459e24d2a0de7e90af7eb38785",
     "https://raw.githubusercontent.com/pomdtr/deno-embedder/hono/middleware/_src/util.ts": "55f4a911f0a2b175a3d7c6dc22c18ed79795cfeb02ea8becbde5992db2f22487",
     "https://raw.githubusercontent.com/pomdtr/deno-embedder/hono/middleware/deps/cliffy/command.ts": "d319813d339a92271d15609eeba34955862be584c94ea80fb61a8125131c4331",
